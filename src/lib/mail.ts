@@ -24,7 +24,7 @@ export async function sendContactEmail({
   message,
 }: ContactEmail) {
   await transporter.sendMail({
-    from: `"Tikamgarh Properties" <${process.env.SMTP_USER}>`,
+    from: `"Agra Properties" <${process.env.SMTP_USER}>`,
     to: process.env.CONTACT_EMAIL,
     replyTo: email,
     subject: `New Contact Form: ${subject}`,
