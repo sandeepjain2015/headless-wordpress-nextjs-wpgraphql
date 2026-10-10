@@ -24,7 +24,7 @@ export default function Header() {
               <Link href="/">Home</Link>
             </li>
             <li className="has-children">
-              <a href="properties.html">Properties</a>
+              <Link href="properties">Properties</Link>
               <ul className="dropdown">
                 <li>
                   <a href="#">Buy Property</a>
@@ -49,10 +49,10 @@ export default function Header() {
               </ul>
             </li>
             <li>
-              <a href="services.html">Services</a>
+              <Link href="services">Services</Link>
             </li>
             <li>
-              <a href="about.html">About</a>
+              <Link href="about">About</Link>
             </li>
             <li>
               <Link href="contact">Contact Us</Link>
