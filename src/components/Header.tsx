@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <>
@@ -14,15 +16,15 @@ export default function Header() {
     <div className="container">
       <div className="menu-bg-wrap">
         <div className="site-navigation">
-          <a href="index.html" className="logo m-0 float-start">
+          <a href="/" className="logo m-0 float-start">
             Property
           </a>
           <ul className="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
             <li className="active">
-              <a href="index.html">Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li className="has-children">
-              <a href="properties.html">Properties</a>
+              <Link href="properties">Properties</Link>
               <ul className="dropdown">
                 <li>
                   <a href="#">Buy Property</a>
@@ -47,13 +49,13 @@ export default function Header() {
               </ul>
             </li>
             <li>
-              <a href="services.html">Services</a>
+              <Link href="services">Services</Link>
             </li>
             <li>
-              <a href="about.html">About</a>
+              <Link href="about">About</Link>
             </li>
             <li>
-              <a href="contact.html">Contact Us</a>
+              <Link href="contact">Contact Us</Link>
             </li>
           </ul>
           <a

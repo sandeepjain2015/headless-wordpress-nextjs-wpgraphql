@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Footer() {
     return (
         <>
@@ -29,16 +30,16 @@ export default function Footer() {
             <h3>Sources</h3>
             <ul className="list-unstyled float-start links">
               <li>
-                <a href="#">About us</a>
+                <Link href="about">About us</Link>
               </li>
               <li>
-                <a href="#">Services</a>
+                <Link href="services">Services</Link>
               </li>
               <li>
-                <a href="#">Vision</a>
+                <Link href="vision">Vision</Link>
               </li>
               <li>
-                <a href="#">Mission</a>
+                <Link href="mission">Mission</Link>
               </li>
               <li>
                 <a href="#">Terms</a>
@@ -76,13 +77,13 @@ export default function Footer() {
             <h3>Links</h3>
             <ul className="list-unstyled links">
               <li>
-                <a href="#">Our Vision</a>
+                <Link href="vision">Our Vision</Link>
               </li>
               <li>
-                <a href="#">About us</a>
+                <Link href="about">About us</Link>
               </li>
               <li>
-                <a href="#">Contact us</a>
+                <Link href="contact">Contact us</Link>
               </li>
             </ul>
             <ul className="list-unstyled social">
