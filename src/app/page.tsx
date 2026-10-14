@@ -1,10 +1,13 @@
 import Agents from "@/components/Agents";
 import Testimonials from "@/components/Testimonials";
 import Hero from "@/sections/home/Hero";
+import { GET_HOME_QUERY } from "@/lib/graphql/queries/home";
 import PopularProperties from "@/sections/home/PopularProperties";
 import { Agent } from "http";
-
+import { fetchGraphQL } from "@/lib/graphql/client";
+import type { HomeResponse } from "@/types/home";
 export default async function Home() {
+  const data = await fetchGraphQL<HomeResponse>(GET_HOME_QUERY);
   return (
     <>
  <Hero slug="home" />
