@@ -1,24 +1,7 @@
-type Property = {
-  id: string;
-  title: string;
-  slug: string;
-
-  featuredImage?: {
-    node?: {
-      sourceUrl: string;
-      altText?: string;
-    } | null;
-  } | null;
-
-  propertyDetail?: {
-    price?: string | null;
-    bedroom?: number | null;
-    bathroom?: number | null;
-  } | null;
-};
+import type { HomeProperty } from "@/types/home";
 
 type PropertyCardProps = {
-  property: Property;
+  property: HomeProperty;
 };
 
 export default function PropertyCard({
