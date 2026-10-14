@@ -1,23 +1,16 @@
 import HeroSlider from "@/sections/home/HeroSlider";
-import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_HERO_QUERY } from "@/lib/graphql/queries/hero";
+import type { HomeResponse } from "@/types/home";
 
 type HeroProps = {
-  slug: string;
+  hero: NonNullable<NonNullable<HomeResponse["page"]>["homepage"]> | null | undefined;
 };
 
-export default async function Hero({ slug }: HeroProps) {
-  const data = await fetchGraphQL(GET_HERO_QUERY, {
-    slug,
-  });
-
-  const homepage = data?.page?.homepage;
-
+export default function Hero({ hero }: HeroProps) {
   const slides = [
-    homepage?.slide1?.node,
-    homepage?.slide2?.node,
-    homepage?.slide3?.node,
-  ].filter(Boolean);
+    hero?.slide1?.node,
+    hero?.slide2?.node,
+    hero?.slide3?.node,
+  ].filter((slide): slide is NonNullable<typeof slide> => Boolean(slide));
 
-  return <HeroSlider slides={slides} />;
+  return <HeroSlider slides={slides.map(({ sourceUrl, altText }) => ({ sourceUrl, altText: altText ?? "" }))} />;
 }

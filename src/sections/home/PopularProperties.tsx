@@ -1,38 +1,9 @@
-import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_PROPERTIES_QUERY } from "@/lib/graphql/queries/properties";
 import PropertySlider from "@/components/PropertySlider";
+import type { HomeProperty } from "@/types/home";
 
-type Property = {
-  id: string;
-  title: string;
-  slug: string;
+type PopularPropertiesProps = { properties: HomeProperty[] };
 
-  featuredImage?: {
-    node?: {
-      sourceUrl: string;
-      altText?: string;
-    } | null;
-  } | null;
-
-  propertyDetail?: {
-    price?: string | null;
-    bedroom?: number | null;
-    bathroom?: number | null;
-  } | null;
-};
-
-type PropertiesData = {
-  properties: {
-    nodes: Property[];
-  };
-};
-
-export default async function PopularProperties() {
-  const data = await fetchGraphQL<PropertiesData>(
-    GET_PROPERTIES_QUERY
-  );
-
-  const properties = data.properties.nodes;
+export default function PopularProperties({ properties }: PopularPropertiesProps) {
 
   return (
     <section className="section">

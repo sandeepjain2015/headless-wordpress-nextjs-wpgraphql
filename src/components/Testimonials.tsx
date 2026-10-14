@@ -1,26 +1,19 @@
-import { fetchGraphQL } from "@/lib/graphql/client";
 import TestimonialsSlider from "./TestimonialsSlider";
-import { GET_TESTIMONIALS } from "@/lib/graphql/queries/testimonials";
+import type { Testimonial } from "@/types/testimonial";
 
-
-interface TestimonialsResponse {
-  testimonials: {
-    nodes: Testimonial[];
-  };
+interface TestimonialsProps {
+  section_title: string;
+  testimonials: Testimonial[];
 }
 
-export default async function Testimonials() {
-  const data = await fetchGraphQL<TestimonialsResponse>(
-    GET_TESTIMONIALS
-  );
-
+export default function Testimonials({ section_title, testimonials }: TestimonialsProps) {
   return (
     <div className="section sec-testimonials">
       <div className="container">
         <div className="row mb-5 align-items-center">
           <div className="col-md-6">
             <h2 className="font-weight-bold heading text-primary mb-4 mb-md-0">
-              Customer Says
+              {section_title}
             </h2>
           </div>
 
@@ -36,9 +29,9 @@ export default async function Testimonials() {
             </div>
           </div>
         </div>
-
+        
         <TestimonialsSlider
-          testimonials={data.testimonials.nodes}
+          testimonials={testimonials}
         />
       </div>
     </div>

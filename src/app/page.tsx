@@ -3,15 +3,14 @@ import Testimonials from "@/components/Testimonials";
 import Hero from "@/sections/home/Hero";
 import { GET_HOME_QUERY } from "@/lib/graphql/queries/home";
 import PopularProperties from "@/sections/home/PopularProperties";
-import { Agent } from "http";
 import { fetchGraphQL } from "@/lib/graphql/client";
 import type { HomeResponse } from "@/types/home";
 export default async function Home() {
   const data = await fetchGraphQL<HomeResponse>(GET_HOME_QUERY);
   return (
     <>
- <Hero slug="home" />
- <PopularProperties /> 
+ <Hero hero={data.page?.homepage} />
+ <PopularProperties properties={data.properties?.nodes ?? []} />
   <section className="features-1">
     <div className="container">
       <div className="row">
@@ -78,7 +77,10 @@ export default async function Home() {
       </div>
     </div>
   </section>
-  <Testimonials />
+  <Testimonials
+    section_title="Customer Says"
+    testimonials={data.testimonials?.nodes ?? []}
+  />
   <div className="section section-4 bg-light">
     <div className="container">
       <div className="row justify-content-center text-center mb-5">
@@ -207,7 +209,7 @@ export default async function Home() {
     </div>
     {/* /.row */}
   </div>
-  <Agents />
+  <Agents agents={data.agents?.nodes ?? []} />
 </>
 
   );

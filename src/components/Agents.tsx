@@ -1,34 +1,11 @@
 import Image from "next/image";
-import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_AGENTS } from "@/lib/graphql/queries/agents";
+import type { HomeAgent } from "@/types/home";
 
-interface Agent {
-  id: string;
-  databaseId: number;
-  name: string;
-  description: string | null;
-  designation: string | null;
-  phone: string | null;
-
-  image: {
-    url: string | null;
-    altText: string | null;
-  } | null;
-
-  twitter: string | null;
-  facebook: string | null;
-  linkedin: string | null;
-  instagram: string | null;
+interface AgentsProps {
+  agents: HomeAgent[];
 }
 
-interface AgentsResponse {
-  agentUsers: Agent[];
-}
-
-export default async function Agents() {
-  const data = await fetchGraphQL<AgentsResponse>(GET_AGENTS);
-
-  const agents = data.agentUsers;
+export default function Agents({ agents }: AgentsProps) {
 
   return (
     <div className="section section-5 bg-light">
@@ -52,14 +29,14 @@ export default async function Agents() {
           {agents.map((agent) => (
             <div
               className="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0"
-              key={agent.id}
+              key={agent.title}
             >
               <div className="h-100 person">
 
-                {agent.image?.url && (
+                {agent.featuredImage?.node?.sourceUrl && (
                   <Image
-                    src={agent.image.url}
-                    alt={agent.image.altText || agent.name}
+                    src={agent.featuredImage.node.sourceUrl}
+                    alt={agent.title}
                     width={400}
                     height={400}
                     className="img-fluid"
@@ -70,25 +47,25 @@ export default async function Agents() {
                 <div className="person-contents">
 
                   <h2 className="mb-0">
-                    <span>{agent.name}</span>
+                    <span>{agent.title}</span>
                   </h2>
 
-                  {agent.designation && (
+                  {agent.agentDetails?.designation && (
                     <span className="meta d-block mb-3">
-                      {agent.designation}
+                      {agent.agentDetails.designation}
                     </span>
                   )}
 
-                  {agent.description && (
-                    <p>{agent.description}</p>
+                  {agent.content && (
+                    <div dangerouslySetInnerHTML={{ __html: agent.content }} />
                   )}
 
                   <ul className="social list-unstyled list-inline dark-hover">
 
-                    {agent.twitter && (
+                    {agent.agentDetails?.twitterUrl && (
                       <li className="list-inline-item">
                         <a
-                          href={agent.twitter}
+                          href={agent.agentDetails.twitterUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -97,10 +74,10 @@ export default async function Agents() {
                       </li>
                     )}
 
-                    {agent.facebook && (
+                    {agent.agentDetails?.facebookUrl && (
                       <li className="list-inline-item">
                         <a
-                          href={agent.facebook}
+                          href={agent.agentDetails.facebookUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -109,10 +86,10 @@ export default async function Agents() {
                       </li>
                     )}
 
-                    {agent.linkedin && (
+                    {agent.agentDetails?.linkedinUrl && (
                       <li className="list-inline-item">
                         <a
-                          href={agent.linkedin}
+                          href={agent.agentDetails.linkedinUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -121,10 +98,10 @@ export default async function Agents() {
                       </li>
                     )}
 
-                    {agent.instagram && (
+                    {agent.agentDetails?.instagramUrl && (
                       <li className="list-inline-item">
                         <a
-                          href={agent.instagram}
+                          href={agent.agentDetails.instagramUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
