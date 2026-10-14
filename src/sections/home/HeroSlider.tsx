@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 type HeroSlide = {
   sourceUrl: string;
-  altText: string;
+  altText?: string | null;
 };
 
 type HeroSliderProps = {

@@ -1,23 +1,14 @@
 import HeroSlider from "@/sections/home/HeroSlider";
-import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_HERO_QUERY } from "@/lib/graphql/queries/hero";
+import type { HomeSlide } from "@/types/home";
 
 type HeroProps = {
-  slug: string;
+  slides: (HomeSlide | null | undefined)[];
 };
 
-export default async function Hero({ slug }: HeroProps) {
-  const data = await fetchGraphQL(GET_HERO_QUERY, {
-    slug,
-  });
+export default function Hero({ slides }: HeroProps) {
+  const availableSlides = slides.filter(
+    (slide): slide is HomeSlide => slide != null
+  );
 
-  const homepage = data?.page?.homepage;
-
-  const slides = [
-    homepage?.slide1?.node,
-    homepage?.slide2?.node,
-    homepage?.slide3?.node,
-  ].filter(Boolean);
-
-  return <HeroSlider slides={slides} />;
+  return <HeroSlider slides={availableSlides} />;
 }

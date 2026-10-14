@@ -1,19 +1,11 @@
-import { fetchGraphQL } from "@/lib/graphql/client";
 import TestimonialsSlider from "./TestimonialsSlider";
-import { GET_TESTIMONIALS } from "@/lib/graphql/queries/testimonials";
+import type { HomeTestimonial } from "@/types/home";
 
-
-interface TestimonialsResponse {
-  testimonials: {
-    nodes: Testimonial[];
-  };
-}
-
-export default async function Testimonials() {
-  const data = await fetchGraphQL<TestimonialsResponse>(
-    GET_TESTIMONIALS
-  );
-
+export default function Testimonials({
+  testimonials,
+}: {
+  testimonials: HomeTestimonial[];
+}) {
   return (
     <div className="section sec-testimonials">
       <div className="container">
@@ -37,9 +29,7 @@ export default async function Testimonials() {
           </div>
         </div>
 
-        <TestimonialsSlider
-          testimonials={data.testimonials.nodes}
-        />
+        <TestimonialsSlider testimonials={testimonials} />
       </div>
     </div>
   );

@@ -1,35 +1,7 @@
 import Image from "next/image";
-import { fetchGraphQL } from "@/lib/graphql/client";
-import { GET_AGENTS } from "@/lib/graphql/queries/agents";
+import type { HomeAgent } from "@/types/home";
 
-interface Agent {
-  id: string;
-  databaseId: number;
-  name: string;
-  description: string | null;
-  designation: string | null;
-  phone: string | null;
-
-  image: {
-    url: string | null;
-    altText: string | null;
-  } | null;
-
-  twitter: string | null;
-  facebook: string | null;
-  linkedin: string | null;
-  instagram: string | null;
-}
-
-interface AgentsResponse {
-  agentUsers: Agent[];
-}
-
-export default async function Agents() {
-  const data = await fetchGraphQL<AgentsResponse>(GET_AGENTS);
-
-  const agents = data.agentUsers;
-
+export default function Agents({ agents }: { agents: HomeAgent[] }) {
   return (
     <div className="section section-5 bg-light">
       <div className="container">

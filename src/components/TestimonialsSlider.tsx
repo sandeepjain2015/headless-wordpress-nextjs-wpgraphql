@@ -3,28 +3,13 @@
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import type { HomeTestimonial } from "@/types/home";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-interface Testimonial {
-  id: string;
-  title: string;
-  content: string;
-  featuredImage?: {
-    node?: {
-      sourceUrl?: string;
-      altText?: string;
-    };
-  };
-  testimonialDetails?: {
-    rating?: number;
-    designation?: string;
-  };
-}
-
 interface TestimonialsSliderProps {
-  testimonials: Testimonial[];
+  testimonials: HomeTestimonial[];
 }
 
 export default function TestimonialsSlider({
