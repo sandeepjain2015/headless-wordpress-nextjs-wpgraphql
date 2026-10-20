@@ -1,9 +1,14 @@
-const WORDPRESS_GRAPHQL_URL =
-  process.env.WORDPRESS_GRAPHQL_URL;
+function getWordPressGraphQLUrl(): string {
+  const url = process.env.WORDPRESS_GRAPHQL_URL;
 
-if (!WORDPRESS_GRAPHQL_URL) {
-  throw new Error("WORDPRESS_GRAPHQL_URL is not defined");
+  if (!url) {
+    throw new Error("WORDPRESS_GRAPHQL_URL is not defined");
+  }
+
+  return url;
 }
+
+const WORDPRESS_GRAPHQL_URL = getWordPressGraphQLUrl();
 
 type GraphQLResponse<T> = {
   data?: T;
